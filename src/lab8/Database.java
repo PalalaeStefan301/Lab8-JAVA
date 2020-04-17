@@ -19,15 +19,6 @@ public class Database {
     private static final String PASSWORD = "sql";
     private static Connection connection = null;
 
-    private static Database ourInstance = new Database();
-
-    public static Database getInstance() {
-        return ourInstance;
-    }
-
-    private Database() {
-    }
-
     public static Connection getConnection() {
         if (connection == null) {
             createConnection();
@@ -39,8 +30,7 @@ public class Database {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (ClassNotFoundException | SQLException e) {
         }
 
         return connection;
